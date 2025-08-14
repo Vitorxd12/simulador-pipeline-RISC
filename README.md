@@ -1,5 +1,9 @@
 # 🧠 Simulador de Pipeline RISC
 
+Este projeto visa desenvolver um simulador de pipeline baseado no modelo de instrução RISC, permitindo a execução de um conjunto específico de instruções. O simulador será implementado em Java e seguirá as características e diretrizes do modelo RISC, proporcionando uma experiência prática na compreensão do funcionamento de pipelines em arquiteturas de computadores.
+
+## 📜 Objetivo
+
 Usando como base o modelo de instrução RISC, é proposto a criação de um simulador de pipeline em 5 estágios. O trabalho deve observar as características gerais do modelo, seguir o padrão de processamento e respeitar as diretrizes de cada estágio. Características gerais do projeto serão descritas a seguir.
 
 ## 📌 Visão geral do Projeto
