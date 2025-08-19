@@ -4,7 +4,11 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 
 public class Memoria {
-    private int[] memoria = new int[32];
+    private int[] memoria;
+
+    public Memoria() {
+        this.memoria = new int[32];
+    }
 
     public void iniciar(){
         try{
@@ -20,5 +24,24 @@ public class Memoria {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    // Getters e Setters ----------------------------------------
+    public int[] getMemoria() {
+        return this.memoria;
+    }
+    public void setMemoria(int[] memoria) {
+        this.memoria = memoria;
+    }
+    public int getValor(int endereco) {
+        if (endereco < 0 || endereco >= memoria.length) {
+            throw new IndexOutOfBoundsException("Endereço fora dos limites da memória.");
+        }
+        return memoria[endereco];
+    }
+    public void setValor(int endereco, int valor) {
+        if (endereco < 0 || endereco >= memoria.length) {
+            throw new IndexOutOfBoundsException("Endereço fora dos limites da memória.");
+        }
+        memoria[endereco] = valor;
     }
 }

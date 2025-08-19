@@ -15,12 +15,49 @@ public class Simulador {
     private Registradores registradores;
     private List<Instrucoes> instrucoes;
 
+    private A_Buscar buscar;
+    private B_Decodificar decodificar;
+    private C_Executar executar;
+    private D_Acessar acessar;
+    private E_Escrever escrever;
+
+    private EstadoPipeline estadoPipeline;
+
     public Simulador() {
         this.pc = new PC();
         this.memoria = new Memoria();
         this.registradores = new Registradores();
         this.instrucoes = new ArrayList<>();
     }
+
+    //------------------- Run ------------------------
+
+    public void run(){
+        while (pc.getValor() < instrucoes.size() * 4) {
+            if (escrever != null) escrever.executar();
+            if (acessar != null) acessar.executar();
+            if (executar != null) executar.executar();
+            if (decodificar != null) decodificar.executar();
+
+            if (pc.getValor() < instrucoes.size() * 4) {
+                int indice = pc.getValor() / 4;
+                Instrucoes instrucaoAtual = instrucoes.get(indice);
+                buscar = new A_Buscar();
+            } else {
+                buscar = null;
+            }
+
+            if (buscar != null) {
+                buscar.executar();
+            }
+            pc.incrementar();
+        }
+        System.out.println("Simulação concluída.");
+
+    }
+
+
+    //--------------Carregar Progama------------------
 
 
     public void carregarProgama() {
