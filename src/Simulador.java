@@ -1,33 +1,53 @@
+import input.Instrucoes;
+import input.Memoria;
+import input.Registradores;
+import stages.*;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.List;
+
 
 public class Simulador {
-    private ArrayList<Integer> registradores;
-    private ArrayList<String> instrucoes;
-    private ArrayList<Integer> memoria;
+    private PC pc;
+    private Memoria memoria;
+    private Registradores registradores;
+    private List<Instrucoes> instrucoes;
 
     public Simulador() {
-        instrucoes = new ArrayList<>();
-        memoria = new ArrayList<>();
-        registradores = new ArrayList<>();
+        this.pc = new PC();
+        this.memoria = new Memoria();
+        this.registradores = new Registradores();
+        this.instrucoes = new ArrayList<>();
     }
 
-    public void addRegistradores(String linha) {
-        registradores.add(Integer.parseInt(linha));
 
-    }
+    public void carregarProgama() {
+        memoria.iniciar();
+        registradores.iniciar();
 
-    public void addMemoria(String linha) {
-        memoria.add(Integer.parseInt(linha));
-    }
+        try (BufferedReader br = new BufferedReader(new FileReader("src/input/instrucoes.txt"))) {
+            String linha;
+            int i = 0;
+            while ((linha = br.readLine()) != null) {
+                String[] partes = linha.trim().split("\\s+");
 
-    public void addInstrucoes(String linha) {
-        instrucoes.add(linha);
-    }
+                String op = partes[0];
+                String p1 = partes[1];
+                String p2 = partes[2];
+                String p3 = partes.length > 3 ? partes[3] : null;
 
-    public void run() {
-        System.out.println("Simulador iniciado com " +
-                "Registradores: " + registradores.size() +
-                ", Instruções: " + instrucoes.size() +
-                ", Memória: " + memoria.size());
+                Instrucoes instrucao = new Instrucoes(op, p1, p2, p3);
+                instrucoes.add(instrucao);
+
+                System.out.println("Instrução[" + i + "] = " + op + " " + p1 + " " + p2 + " " + p3);
+                i++;
+            }
+        } catch (Exception e) {
+            System.out.println("Erro ao carregar instruções: " + e.getMessage());
+        }
     }
 }
+
+
