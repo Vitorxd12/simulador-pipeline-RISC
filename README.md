@@ -1,3 +1,5 @@
+Enviar para danilo.ferreira@academico.ifs.edu.br
+
 # 🧠 Simulador de Pipeline RISC
 
 Usando como base o modelo de instrução RISC, é proposto a criação de um simulador de pipeline em 5 estágios. O trabalho deve observar as características gerais do modelo, seguir o padrão de processamento e respeitar as diretrizes de cada estágio. Características gerais do projeto serão descritas a seguir.
