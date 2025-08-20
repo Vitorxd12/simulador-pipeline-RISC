@@ -1,3 +1,5 @@
+package stages;
+
 public class PC {
     private int valor;
 

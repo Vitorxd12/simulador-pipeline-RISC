@@ -21,8 +21,6 @@ public class Simulador {
     private D_Acessar acessar;
     private E_Escrever escrever;
 
-    private EstadoPipeline estadoPipeline;
-
     public Simulador() {
         this.pc = new PC();
         this.memoria = new Memoria();
@@ -42,13 +40,13 @@ public class Simulador {
             if (pc.getValor() < instrucoes.size() * 4) {
                 int indice = pc.getValor() / 4;
                 Instrucoes instrucaoAtual = instrucoes.get(indice);
-                buscar = new A_Buscar();
+                buscar = new A_Buscar(pc);
             } else {
                 buscar = null;
             }
 
             if (buscar != null) {
-                buscar.executar();
+                buscar.executar(instrucoes);
             }
             pc.incrementar();
         }
