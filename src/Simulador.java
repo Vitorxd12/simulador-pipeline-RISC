@@ -21,35 +21,30 @@ public class Simulador {
     private D_Acessar acessar;
     private E_Escrever escrever;
 
+    private instrucoes 
+
     public Simulador() {
         this.pc = new PC();
         this.memoria = new Memoria();
         this.registradores = new Registradores();
         this.instrucoes = new ArrayList<>();
+
+        this.buscar = new Buscar();
+        this.decodificar = new Decodificar();
+        this.executar = new Executar();
+        this.acessar = new Acessar();
+        this.escrever = new Escrever();
     }
 
     //------------------- Run ------------------------
 
     public void run(){
         while (pc.getValor() < instrucoes.size() * 4) {
-            if (escrever != null) escrever.executar();
-            if (acessar != null) acessar.executar();
-            if (executar != null) executar.executar();
-            if (decodificar != null) decodificar.executar();
-
-            if (pc.getValor() < instrucoes.size() * 4) {
-                int indice = pc.getValor() / 4;
-                Instrucoes instrucaoAtual = instrucoes.get(indice);
-                buscar = new A_Buscar(pc);
-            } else {
-                buscar = null;
-            }
-
-            if (buscar != null) {
-                buscar.executar(instrucoes);
-            }
-            pc.incrementar();
-        }
+            escrita.executar(rescrita);
+            rescrita = acesso.executar(racesso);
+            racesso = executar.executar(rexecutar);
+            rexecutar = decodificar.executar(rdecodificar);
+            rdecodificar = buscar.executar();
         System.out.println("Simulação concluída.");
 
     }
