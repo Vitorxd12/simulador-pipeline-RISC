@@ -45,6 +45,7 @@ public class Simulador {
             racesso = executar.executar(rexecutar);
             rexecutar = decodificar.executar(rdecodificar);
             rdecodificar = buscar.executar();
+        }
         System.out.println("Simulação concluída.");
 
     }
