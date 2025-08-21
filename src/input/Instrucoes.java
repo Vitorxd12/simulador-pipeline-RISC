@@ -8,16 +8,17 @@ public class Instrucoes {
     private String r3;
 
     public Instrucoes(String instrucao, String r1, String r2, String r3) {
-        switch(instrucao){
-                case("add"){
-                    
-                } case("sub") {
-
-                } case("sw") {
-
-                } case("lw") {
-                } default() {
-                    System.out.println("Erro na criação da instrução")
-                }
+        switch (instrucao) {
+            case ("add"):
+                break;
+            case ("sub"):
+                break;
+            case ("sw"):
+                break;
+            case ("lw"):
+                break;
+            default:
+                System.out.println("Erro na criação da instrução");
+        }
     }
 }

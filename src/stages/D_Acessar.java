@@ -1,7 +1,10 @@
 package stages;
 
+import input.Instrucoes;
+import input.Memoria;
+
 public class D_Acessar {
-    public boolean executar() {
-        return true;
+    public Instrucoes run(Instrucoes instrucoes, E_Escrever escrever, Memoria memoria) {
+        return instrucoes;
     }
 }

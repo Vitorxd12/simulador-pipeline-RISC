@@ -1,7 +1,9 @@
 package stages;
 
+import input.Instrucoes;
+import input.Memoria;
+
 public class E_Escrever {
-    public boolean executar() {
-        return true;
+    public void run(Instrucoes rescrever, Memoria memoria) {
     }
 }

@@ -21,7 +21,13 @@ public class Simulador {
     private D_Acessar acessar;
     private E_Escrever escrever;
 
-    private instrucoes 
+    private Instrucoes rdecodificar;
+    private Instrucoes rexecutar;
+    private Instrucoes racessar;
+    private Instrucoes rescrever;
+
+    //cada classe vai receber o re da classe anterior e vai retornar um objeto da classe instrução
+
 
     public Simulador() {
         this.pc = new PC();
@@ -29,22 +35,23 @@ public class Simulador {
         this.registradores = new Registradores();
         this.instrucoes = new ArrayList<>();
 
-        this.buscar = new Buscar();
-        this.decodificar = new Decodificar();
-        this.executar = new Executar();
-        this.acessar = new Acessar();
-        this.escrever = new Escrever();
+        this.buscar = new A_Buscar();
+        this.decodificar = new B_Decodificar();
+        this.executar = new C_Executar();
+        this.acessar = new D_Acessar();
+        this.escrever = new E_Escrever();
+
     }
 
     //------------------- Run ------------------------
 
     public void run(){
         while (pc.getValor() < instrucoes.size() * 4) {
-            escrita.executar(rescrita);
-            rescrita = acesso.executar(racesso);
-            racesso = executar.executar(rexecutar);
-            rexecutar = decodificar.executar(rdecodificar);
-            rdecodificar = buscar.executar();
+            escrever.run(rescrever, memoria);
+            rescrever = acessar.run(racessar, escrever, memoria);
+            racessar = executar.run(rexecutar, acessar);
+            rexecutar = decodificar.run(rdecodificar, executar, memoria);
+            rdecodificar = buscar.run(instrucoes, pc);
         }
         System.out.println("Simulação concluída.");
 
