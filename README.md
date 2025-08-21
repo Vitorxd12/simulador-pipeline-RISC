@@ -1,3 +1,5 @@
+Enviar para danilo.ferreira@academico.ifs.edu.br
+
 # 🧠 Simulador de Pipeline RISC
 
 Este projeto visa desenvolver um simulador de pipeline baseado no modelo de instrução RISC, permitindo a execução de um conjunto específico de instruções. O simulador será implementado em Java e seguirá as características e diretrizes do modelo RISC, proporcionando uma experiência prática na compreensão do funcionamento de pipelines em arquiteturas de computadores.
