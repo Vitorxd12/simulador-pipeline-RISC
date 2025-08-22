@@ -14,10 +14,15 @@ public class Memoria {
         try{
             BufferedReader br = new BufferedReader(new FileReader("src/input/memoria.txt"));
             String linha;
+            System.out.println("\nIniciando Memoria");
+            for (int j = 0; j < memoria.length; j++){
+                System.out.printf("%3d ", j);
+            }
+            System.out.println();
             int i = 0;
             while((linha = br.readLine()) != null){
                 this.memoria[i] = Integer.parseInt(linha);
-                System.out.println("Memoria[" + i + "] = " + this.memoria[i]);
+                System.out.printf("%4d", this.memoria[i]);
                 i++;
             }
             br.close();

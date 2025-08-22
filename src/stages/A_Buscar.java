@@ -1,19 +1,22 @@
 package stages;
 
-import input.Instrucoes;
+import input.Instrucao;
 
 import java.util.List;
 
 public class A_Buscar {
-    private Instrucoes instrucaoAtual;
+    private Instrucao instrucaoAtual;
 
-    public Instrucoes run(List<Instrucoes> instrucoes, PC pc) {
+    public Instrucao run(List<Instrucao> instrucoes, PC pc) {
         int endereco = pc.getValor() / 4;
         if (endereco < instrucoes.size()) {
             instrucaoAtual = instrucoes.get(endereco);
-            System.out.println("Buscar: " + instrucaoAtual);
+            System.out.println("Buscar: " + instrucaoAtual + " no endereço " + endereco);
+            pc.incrementar();
+            return instrucaoAtual;
+        } else {
+            pc.incrementar();
+            return null;
         }
-        pc.incrementar();
-        return instrucaoAtual;
     }
 }

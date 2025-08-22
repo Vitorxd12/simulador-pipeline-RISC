@@ -1,11 +1,10 @@
 package stages;
 
-import input.Instrucoes;
-import input.Memoria;
+import input.Instrucao;
 
 //vai pegar os indicies do registradores e a sintrução para realizar a execução
 public class C_Executar {
-    public Instrucoes run(Instrucoes instrucoes, D_Acessar accessar) {
+    public Instrucao run(Instrucao instrucoes, D_Acessar accessar) {
         return instrucoes;
     }
 }

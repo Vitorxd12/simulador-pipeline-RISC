@@ -8,14 +8,25 @@ public class Registradores {
     public Registradores() {
         this.registradores = new int[32];
     }
+    public int getValor(int endereco) {
+        while(endereco >= registradores.length) {
+            endereco -= registradores.length;
+        }
+        return registradores[endereco];
+    }
     public void iniciar(){
         try{
             BufferedReader br = new BufferedReader(new FileReader("src/input/registradores.txt"));
             String linha;
+            System.out.println("\nIniciando Registradores");
+            for (int j = 0; j < registradores.length; j++){
+                System.out.printf("%4d", j);
+            }
+            System.out.println();
             int i = 0;
             while((linha = br.readLine()) != null){
                 this.registradores[i] = Integer.parseInt(linha);
-                System.out.println("Registrador[" + i + "] = " + this.registradores[i]);
+                System.out.printf("%4d", this.registradores[i]);
                 i++;
             }
             br.close();

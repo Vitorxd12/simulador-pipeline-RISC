@@ -7,12 +7,10 @@ public class PC {
         this.valor = 0;
     }
     public int incrementar() {
-        return valor + 4;
+        this.valor += 4;
+        return valor;
     }
     public int getValor() {
         return valor;
-    }
-    public void setValor(int valor) {
-        this.valor = valor;
     }
 }
