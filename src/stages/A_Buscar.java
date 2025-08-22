@@ -11,11 +11,12 @@ public class A_Buscar {
         int endereco = pc.getValor() / 4;
         if (endereco < instrucoes.size()) {
             instrucaoAtual = instrucoes.get(endereco);
-            System.out.println("Buscar: " + instrucaoAtual + " no endereço " + endereco);
+            System.out.println("[IF] PC = " + pc.getValor() + " → Instrução buscada: " + instrucaoAtual.toString() + " ");
             pc.incrementar();
             return instrucaoAtual;
         } else {
             pc.incrementar();
+            System.out.println("Nenhuma instrução encontrada no endereço " + endereco);
             return null;
         }
     }

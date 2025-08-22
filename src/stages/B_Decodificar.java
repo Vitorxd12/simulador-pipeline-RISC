@@ -11,21 +11,32 @@ public class B_Decodificar {
     public int valorR3;
 
 
-    public Instrucao run(Instrucao instrucao, C_Executar executar, Memoria memoria) {
+    public Instrucao run(Instrucao instrucao, Registradores registradores) {
         this.instrucaoAtual = instrucao;
 
         if (instrucaoAtual != null) {
             // Decodifica os registradores
-            valorR1 = Registradores.getValor(instrucaoAtual.getReg1());
-            valorR2 = Registradores.getValor(instrucaoAtual.getReg2());
-            valorR3 = Registradores.getValor(instrucaoAtual.getReg3());
+            valorR1 = registradores.getValor(instrucaoAtual.getReg1());
+            valorR2 = registradores.getValor(instrucaoAtual.getReg2());
+            valorR3 = registradores.getValor(instrucaoAtual.getReg3());
 
-            System.out.println("Decodificar: " + instrucaoAtual + " R1: " + valorR1 + " R2: " + valorR2 + " R3: " + valorR3);
+            System.out.println("[ID] Decodificado → Operação: " + instrucao.getInstrucao()
+                    + " | Reg " + instrucaoAtual.getReg1() + " = " + valorR1
+                    + " | Reg " + instrucaoAtual. getReg2() + " = " + valorR2
+                    + " | Reg " + instrucaoAtual. getReg3() + " = " + valorR3);
         } else {
             System.out.println("Nenhuma instrução para decodificar.");
         }
-
         return instrucaoAtual;
     }
 
+    public int getValorR1() {
+        return valorR1;
+    }
+    public int getValorR2() {
+        return valorR2;
+    }
+    public int getValorR3() {
+        return valorR3;
+    }
 }

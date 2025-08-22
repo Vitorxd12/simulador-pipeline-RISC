@@ -44,13 +44,13 @@ public class Simulador {
     }
 
     //------------------- Run ------------------------
-
     public void run(){
-        while (pc.getValor() < instrucoes.size() * 4) {
+        System.out.println("Simulador iniciado.");
+        while (pc.getValor() < instrucoes.size() * 4 + 6) {
             escrever.run(rescrever, memoria);
             rescrever = acessar.run(racessar, escrever, memoria);
-            racessar = executar.run(rexecutar, acessar);
-            rexecutar = decodificar.run(rdecodificar, executar, memoria);
+            racessar = executar.run(rexecutar, decodificar, registradores);
+            rexecutar = decodificar.run(rdecodificar, registradores);
             rdecodificar = buscar.run(instrucoes, pc);
         }
         System.out.println("Simulação concluída.");

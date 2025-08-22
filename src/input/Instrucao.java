@@ -64,5 +64,19 @@ public class Instrucao {
     public int getReg3(){
         return reg3;
     };
+    public String getInstrucao() {
+        if (instrucao == null) {
+            return "null";
+        }
+        return instrucao;
+    }
+    public String toString(){
+        return "\"" +
+                "" + instrucao +
+                " " + reg1 +
+                " " + reg2 +
+                " " + reg3 +
+                '\"';
+    }
 }
 

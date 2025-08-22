@@ -8,12 +8,6 @@ public class Registradores {
     public Registradores() {
         this.registradores = new int[32];
     }
-    public int getValor(int endereco) {
-        while(endereco >= registradores.length) {
-            endereco -= registradores.length;
-        }
-        return registradores[endereco];
-    }
     public void iniciar(){
         try{
             BufferedReader br = new BufferedReader(new FileReader("src/input/registradores.txt"));
