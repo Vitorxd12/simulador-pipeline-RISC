@@ -4,6 +4,8 @@ package input;
 public class Instrucao {
     private String instrucao;
     private int reg1, reg2, reg3;
+    private int val1, val2, val3;
+    private int resultado;
 
     public Instrucao(String operador, String r1, String r2, String r3) {
         switch (operador) {
@@ -38,6 +40,28 @@ public class Instrucao {
             default:
                 System.out.println("Erro na criação da instrução");
         }
+    }
+
+    public void setVal(int valorR1, int valorR2, int valorR3) {
+        this.val1 = valorR1;
+        this.val2 = valorR2;
+        this.val3 = valorR3;
+    }
+    public void setResultado(int resultado) {
+        this.resultado = resultado;
+    }
+    public int getResultado() {
+        return this.resultado;
+    }
+
+    public int getValorR1() {
+        return val1;
+    }
+    public int getValorR2() {
+        return val2;
+    }
+    public int getValorR3() {
+        return val3;
     }
 
     public int registradorParaInt(String reg) {
