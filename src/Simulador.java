@@ -74,7 +74,7 @@ public class Simulador {
                 String op = partes[0];
                 String p1 = partes[1];
                 String p2 = partes[2];
-                String p3 = partes.length > 3 ? partes[3] : null;
+                String p3 = partes.length > 3 ? partes[3] : " ";
                 System.out.print("\nInstrução[" + i + "] = " + op + " " + p1 + " " + p2 + " " + p3);
 
                 Instrucao instrucao = new Instrucao(op, p1, p2, p3);
