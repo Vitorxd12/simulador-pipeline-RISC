@@ -47,8 +47,8 @@ public class Simulador {
     public void run(){
         System.out.println("Simulador iniciado.");
         while (pc.getValor() < instrucoes.size() * 4 + 6) {
-            escrever.run(rescrever, memoria);
-            rescrever = acessar.run(racessar, escrever, memoria);
+            escrever.run(rescrever, acessar, executar, registradores);
+            rescrever = acessar.run(racessar, memoria, executar, registradores);
             racessar = executar.run(rexecutar, decodificar, registradores);
             rexecutar = decodificar.run(rdecodificar, registradores);
             rdecodificar = buscar.run(instrucoes, pc);
@@ -58,7 +58,7 @@ public class Simulador {
     }
 
 
-    //--------------Carregar Progama------------------
+    //--------------Carregar Programa------------------
 
 
     public void carregarProgama() {
