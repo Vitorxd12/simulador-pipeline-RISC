@@ -46,13 +46,16 @@ public class Simulador {
     //------------------- Run ------------------------
     public void run(){
         System.out.println("Simulador iniciado.");
-        while (pc.getValor() < instrucoes.size() * 4 + 6) {
-            escrever.run(rescrever, acessar, executar, registradores);
+        while (pc.getValor() < instrucoes.size() * 4 + 16) {
+            escrever.run(rescrever, acessar, registradores);
             rescrever = acessar.run(racessar, memoria, executar, registradores);
             racessar = executar.run(rexecutar, decodificar, registradores);
             rexecutar = decodificar.run(rdecodificar, registradores);
             rdecodificar = buscar.run(instrucoes, pc);
         }
+        System.out.println();
+        registradores.salvar();
+        memoria.salvar();
         System.out.println("Simulação concluída.");
 
     }
@@ -73,7 +76,7 @@ public class Simulador {
 
                 String op = partes[0];
                 String p1 = partes[1];
-                String p2 = partes[2];
+                String p2 = partes.length > 2 ? partes[2] : " ";
                 String p3 = partes.length > 3 ? partes[3] : " ";
                 System.out.print("\nInstrução[" + i + "] = " + op + " " + p1 + " " + p2 + " " + p3);
 

@@ -1,7 +1,6 @@
 package input;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
+import java.io.*;
 
 public class Memoria {
     private int[] memoria;
@@ -30,6 +29,19 @@ public class Memoria {
             e.printStackTrace();
         }
     }
+
+    public void salvar() {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/input/memoria.txt"))) {
+            for (int i = 0; i < memoria.length; i++) {
+                writer.write(String.valueOf(memoria[i]));
+                writer.newLine();
+            }
+            System.out.println("Memoria salva com sucesso.");
+        } catch (IOException e) {
+            System.out.println("Erro ao salvar a memoria: " + e.getMessage());
+        }
+    }
+
     // Getters e Setters ----------------------------------------
     public int[] getMemoria() {
         return this.memoria;

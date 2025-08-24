@@ -3,3 +3,6 @@ sub x2 x4 x9
 lw x1 3(x6)
 add x10 x1 x3
 sw x10 3(x6)
+swap x5 x8
+avg x22 x27 x21
+rev x14 x15

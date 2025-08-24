@@ -5,7 +5,7 @@ import input.Registradores;
 
 public class E_Escrever {
     public Instrucao instrucaoAtual;
-    public void run(Instrucao instrucoes, D_Acessar acessador, C_Executar executor, Registradores registradores) {
+    public void run(Instrucao instrucoes, D_Acessar acessador, Registradores registradores) {
         this.instrucaoAtual = instrucoes;
 
         if (instrucaoAtual != null) {
@@ -16,9 +16,9 @@ public class E_Escrever {
                 case "sub":
                 case "avg":
                 case "rev":
-                    int resultado = executor.getResultado();
-                    registradores.setValor(instrucaoAtual.getReg1(), resultado);
-                    System.out.println("[WB] Escrevendo resultado (" + resultado + ") no registrador R" + instrucaoAtual.getReg1());
+                    int result = acessador.getValorLido();
+                    registradores.setValor(instrucaoAtual.getReg1(), result);
+                    System.out.println("[WB] Escrevendo resultado (" + result + ") no registrador R" + instrucaoAtual.getReg1());
                     break;
 
                 case "lw":
@@ -32,7 +32,9 @@ public class E_Escrever {
                     break;
 
                 case "swap":
-                    // Fazer logica de troca entre registradores
+                    registradores.setValor(instrucoes.getReg1(), acessador.getValorLido2());
+                    registradores.setValor(instrucoes.getReg2(), acessador.getValorLido());
+                    System.out.println("[WB] Finalizando SWAP. r" + instrucoes.getReg1() + " agora eh " + acessador.getValorLido2() + " e r" + instrucoes.getReg2() + " agora eh " + acessador.getValorLido() + ".");
                     break;
 
                 default:
