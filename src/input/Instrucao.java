@@ -10,19 +10,15 @@ public class Instrucao {
     public Instrucao(String operador, String r1, String r2, String r3) {
         switch (operador) {
             case ("add"):
-                this.instrucao = operador;
-                reg1 = registradorParaInt(r1);
-                reg2 = registradorParaInt(r2);
-                reg3 = registradorParaInt(r3);
-                System.out.println("\n" + instrucao + " " + reg1 + " " + reg2 + " " + reg3);
-                break;
             case ("sub"):
+            case ("avg"):
                 this.instrucao = operador;
                 reg1 = registradorParaInt(r1);
                 reg2 = registradorParaInt(r2);
                 reg3 = registradorParaInt(r3);
                 System.out.println("\n" + instrucao + " " + reg1 + " " + reg2 + " " + reg3);
                 break;
+            case ("lw"):
             case ("sw"):
                 this.instrucao = operador;
                 reg1 = registradorParaInt(r1);
@@ -30,12 +26,13 @@ public class Instrucao {
                 reg3 = enderecoParaInt(r2);
                 System.out.println("\n" + instrucao + " " + reg1 + " " + reg2 + " " + reg3);
                 break;
-            case ("lw"):
+
+            case ("swap"):
+            case ("rev"):
                 this.instrucao = operador;
                 reg1 = registradorParaInt(r1);
-                reg2 = offsetParaInt(r2);
-                reg3 = enderecoParaInt(r2);
-                System.out.println("\n" + instrucao + " " + reg1 + " " + reg2 + " " + reg3);
+                reg2 = registradorParaInt(r2);
+                System.out.println("\n" + instrucao + " " + reg1 + " " + reg2);
                 break;
             default:
                 System.out.println("Erro na criação da instrução");
@@ -74,10 +71,10 @@ public class Instrucao {
     }
     public int enderecoParaInt(String reg) {
         String regex = "\\d+\\(x";
-        reg = reg.replaceAll(regex, "");
+        String nreg = reg.replaceAll(regex, "");
         String regex2 = "\\)";
-        reg = reg.replaceAll(regex2, "");
-        return Integer.parseInt(reg);
+        nreg = nreg.replaceAll(regex2, "");
+        return Integer.parseInt(nreg);
     }
     public int getReg1(){
         return reg1;

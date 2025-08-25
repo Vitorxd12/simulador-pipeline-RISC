@@ -1,7 +1,6 @@
 package input;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
+import java.io.*;
 
 public class Registradores {
     private int[] registradores;
@@ -28,6 +27,19 @@ public class Registradores {
             e.printStackTrace();
         }
     }
+
+    public void salvar() {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/input/registradores.txt"))) {
+            for (int i = 0; i < registradores.length; i++) {
+                writer.write(String.valueOf(registradores[i]));
+                writer.newLine(); // Adiciona uma nova linha após cada valor
+            }
+            System.out.println("Registradores salvos com sucesso.");
+        } catch (IOException e) {
+            System.out.println("Erro ao salvar os registradores: " + e.getMessage());
+        }
+    }
+
     // Getters e Setters ----------------------------------------
     public int[] getRegistradores() {
         return this.registradores;

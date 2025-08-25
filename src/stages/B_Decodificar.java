@@ -15,15 +15,44 @@ public class B_Decodificar {
 
         if (instrucaoAtual != null) {
             // Decodifica os registradores
-            valorR1 = registradores.getValor(instrucaoAtual.getReg1());
-            valorR2 = registradores.getValor(instrucaoAtual.getReg2());
-            valorR3 = registradores.getValor(instrucaoAtual.getReg3());
+            switch (instrucaoAtual.getInstrucao()) {
+                case ("add"):
+                case ("sub"):
+                case ("avg"):
+                    valorR1 = registradores.getValor(instrucaoAtual.getReg1());
+                    valorR2 = registradores.getValor(instrucaoAtual.getReg2());
+                    valorR3 = registradores.getValor(instrucaoAtual.getReg3());
 
-            System.out.println("[ID]" + pc.getValor() +  " Decodificado → Operação: " + instrucao.getInstrucao()
-                    + " | Reg " + instrucaoAtual.getReg1() + " = " + valorR1
-                    + " | Reg " + instrucaoAtual. getReg2() + " = " + valorR2
-                    + " | Reg " + instrucaoAtual. getReg3() + " = " + valorR3);
-            instrucaoAtual.setVal(valorR1, valorR2, valorR3);
+                    System.out.println("[ID] Decodificado → Operação: " + instrucao.getInstrucao()
+                            + " | Reg " + instrucaoAtual.getReg1() + " = " + valorR1
+                            + " | Reg " + instrucaoAtual. getReg2() + " = " + valorR2
+                            + " | Reg " + instrucaoAtual. getReg3() + " = " + valorR3);
+                    break;
+                case ("lw"):
+                case ("sw"):
+                    valorR1 = registradores.getValor(instrucaoAtual.getReg1());;
+                    valorR2 = instrucaoAtual.getReg2();
+                    valorR3 = registradores.getValor(instrucaoAtual.getReg3());
+
+                    System.out.println("[ID] Decodificado → Operação: " + instrucao.getInstrucao()
+                            + " | Reg " + instrucaoAtual.getReg1() + " = " + valorR1
+                            + " | Offset " + instrucaoAtual.getReg2() + " = " + valorR2
+                            + " | Reg " + instrucaoAtual. getReg3() + " = " + valorR3);
+                    break;
+
+                case ("swap"):
+                case ("rev"):
+                    valorR1 = registradores.getValor(instrucaoAtual.getReg1());
+                    valorR2 = registradores.getValor(instrucaoAtual.getReg2());
+
+                    System.out.println("[ID] Decodificado → Operação: " + instrucao.getInstrucao()
+                            + " | Reg " + instrucaoAtual.getReg1() + " = " + valorR1
+                            + " | Reg " + instrucaoAtual. getReg2() + " = " + valorR2);
+                    break;
+                default:
+                    System.out.println("Erro na decodificação da instrução");
+            }
+
         } else {
             System.out.println("Nenhuma instrução para decodificar.");
         }
