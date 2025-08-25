@@ -57,7 +57,6 @@ public class Simulador {
         registradores.salvar();
         memoria.salvar();
         System.out.println("Simulação concluída.");
-
     }
 
 

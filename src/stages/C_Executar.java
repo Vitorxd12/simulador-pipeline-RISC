@@ -1,35 +1,32 @@
 package stages;
 
 import input.Instrucao;
-import input.Registradores;
 
 public class C_Executar {
     public Instrucao instrucaoAtual;
     public int resultado;
     public int[] resultadoSwap = new int[2];
 
-    public Instrucao run(Instrucao instrucao, B_Decodificar decodificador, Registradores registradores) {
+    public Instrucao run(Instrucao instrucao, PC pc) {
         this.instrucaoAtual = instrucao;
-        resultado = 0;
 
         if (instrucaoAtual != null) {
-            int valR1 = decodificador.getValorR1();
-            int valR2 = decodificador.getValorR2();
-            int valR3 = decodificador.getValorR3();
+            int valR1 = instrucao.getValorR1();
+            int valR2 = instrucao.getValorR2();
+            int valR3 = instrucao.getValorR3();
 
             switch (instrucaoAtual.getInstrucao()) {
                 case "add":
-                    resultado = valR2 + valR3;
-                    System.out.println("[EX] Executando ADD → x" + instrucaoAtual.getReg1()
+                    System.out.println("[EX]" + pc.getValor() + " Executando ADD → x" + instrucaoAtual.getReg1()
                             + " = " + valR2 + " + " + valR3
-                            + " | Resultado=" + resultado);
+                            + " | Resultado=" + instrucao.getResultado());
                     break;
 
                 case "sub":
-                    resultado = valR2 - valR3;
-                    System.out.println("[EX] Executando SUB → x" + instrucaoAtual.getReg1()
+                    instrucao.setResultado(valR2 - valR3);
+                    System.out.println("[EX]" + pc.getValor() + " Executando SUB → x" + instrucaoAtual.getReg1()
                             + " = " + valR2 + " - " + valR3
-                            + " | Resultado=" + resultado);
+                            + " | Resultado=" + instrucao.getResultado());
                     break;
 
                 case "lw":
@@ -68,12 +65,11 @@ public class C_Executar {
                     break;
 
                 default:
-                    System.out.println("[EX] Operação não suportada: " + instrucaoAtual.getInstrucao());
+                    System.out.println("[EX]" + pc.getValor() + " Operação não suportada: " + instrucaoAtual.getInstrucao());
             }
         } else {
             System.out.println("Nenhuma instrução para executar.");
         }
-
         return instrucaoAtual;
     }
 

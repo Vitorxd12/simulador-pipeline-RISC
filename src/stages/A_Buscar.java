@@ -11,7 +11,7 @@ public class A_Buscar {
         int endereco = pc.getValor() / 4;
         if (endereco < instrucoes.size()) {
             instrucaoAtual = instrucoes.get(endereco);
-            System.out.println("[IF] PC = " + pc.getValor() + " → Instrução buscada: " + instrucaoAtual.toString() + " ");
+            System.out.println("[IF]" + pc.getValor() + " → Instrução buscada: " + instrucaoAtual.toString() + " ");
             pc.incrementar();
             return instrucaoAtual;
         } else {

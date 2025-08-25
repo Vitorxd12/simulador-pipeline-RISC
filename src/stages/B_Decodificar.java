@@ -1,17 +1,16 @@
 package stages;
 
-import input.Memoria;
 import input.Registradores;
 import input.Instrucao;
 
 public class B_Decodificar {
-    public Instrucao instrucaoAtual;
-    public int valorR1;
-    public int valorR2;
-    public int valorR3;
+    private Instrucao instrucaoAtual;
+    private int valorR1;
+    private int valorR2;
+    private int valorR3;
 
 
-    public Instrucao run(Instrucao instrucao, Registradores registradores) {
+    public Instrucao run(Instrucao instrucao, Registradores registradores, PC pc) {
         this.instrucaoAtual = instrucao;
 
         if (instrucaoAtual != null) {
@@ -53,19 +52,10 @@ public class B_Decodificar {
                 default:
                     System.out.println("Erro na decodificação da instrução");
             }
+
         } else {
             System.out.println("Nenhuma instrução para decodificar.");
         }
         return instrucaoAtual;
-    }
-
-    public int getValorR1() {
-        return valorR1;
-    }
-    public int getValorR2() {
-        return valorR2;
-    }
-    public int getValorR3() {
-        return valorR3;
     }
 }
