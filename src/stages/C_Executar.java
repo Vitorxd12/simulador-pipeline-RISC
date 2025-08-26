@@ -40,17 +40,14 @@ public class C_Executar {
                     break;
 
                 case "swap":
-                    System.out.println("swap não implementado");
-                    //int resultadoSwap1 = valR1;
-                    //int resultadoSwap2 = valR2;
-                    //System.out.println("[EX] Executando SWAP -> Valores: " + valR1 + " e " + valR2);
-                    //instrucao.setVal(resultadoSwap2, resultadoSwap1, 0);
-                    //break;
+                    System.out.println("[EX] Executando SWAP → sem operações para serem feitas");
+                    break;
+
 
                 case "avg":
-                    int resultado = (valR2 + valR3) / 2;
-                    System.out.println("[EX] Executando AVG -> r" + instrucao.getReg1() + " = (" + valR2 + " + " + valR3 + ") / 2 | Resultado = " + resultado);
-                    instrucao.setResultado(resultado);
+                    int media = (valR2 + valR3) / 2;
+                    System.out.println("[EX] Executando AVG -> r" + instrucao.getReg1() + " = (" + valR2 + " + " + valR3 + ") / 2 | Resultado = " + media);
+                    instrucao.setResultado(media);
                     break;
 
                 case "rev":

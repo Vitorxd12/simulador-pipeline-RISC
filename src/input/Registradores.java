@@ -23,6 +23,9 @@ public class Registradores {
     public int getTamanho() {
         return registradores.length;
     }
+    public int[] getRegistradores() {
+        return registradores;
+    }
     //read write
     public int getValor(int endereco) {
         if (endereco < 0){

@@ -20,6 +20,9 @@ public class Memoria {
             System.out.println("Erro ao salvar a memoria: " + e.getMessage());
         }
     }
+    public int[] getMemoria() {
+        return memoria;
+    }
     public int getTamanho() {
         return memoria.length;
     }

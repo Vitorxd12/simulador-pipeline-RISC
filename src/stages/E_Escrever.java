@@ -11,15 +11,17 @@ public class E_Escrever {
                     int valorLido = instrucao.getResultado();
                     int endereco = instrucao.getReg1();
                     registradores.setValor(endereco, valorLido);
-                    System.out.println("[WB] "+ instrucao.getInstrucao() +" Escrevendo valor da memoria (" + valorLido + ") no registrador R" + endereco + ".");
+                    System.out.println("[WB] Operação "+ instrucao.getInstrucao() +" escrevendo valor da memoria (" + valorLido + ") no registrador R" + endereco + ".");
                     break;
                 case "swap":
-                    System.out.println("logica escrever do swap não ta pront");
-                    //registradores.setValor(instrucoes.getReg1(), acessador.getValorLido2());
-                    //registradores.setValor(instrucoes.getReg2(), acessador.getValorLido());
-                    //System.out.println("[WB] Finalizando SWAP. r" + instrucoes.getReg1() + " agora eh " + acessador.getValorLido2() + " e r" + //instrucoes.getReg2() + " agora eh " + acessador.getValorLido() + ".");
-                    //break;
-
+                    int reg1 = instrucao.getReg1();
+                    int reg2 = instrucao.getReg2();
+                    int valor1 = instrucao.getValorR1();
+                    int valor2 = instrucao.getValorR2();
+                    registradores.setValor(reg1, valor2);
+                    registradores.setValor(reg2, valor1);
+                    System.out.println("[WB] Swap: trocou R" + reg1 + " (" + valor1 + ") com R" + reg2 + " (" + valor2 + ")");
+                    break;
                 default:
                     System.out.println("[WB] Operação sem escrita em registrador: " + instrucao.getInstrucao());
             }
