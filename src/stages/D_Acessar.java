@@ -6,7 +6,7 @@ import input.Registradores;
 
 public class D_Acessar {
 
-    public Instrucao run(Instrucao instrucao, Memoria memoria, Registradores registradores) {
+    public Instrucao run(Instrucao instrucao, Memoria memoria) {
         if (instrucao != null) {
             switch (instrucao.getInstrucao()) {
                 case "lw":
@@ -29,11 +29,11 @@ public class D_Acessar {
                     break;
 
                 case "add", "sub", "avg", "rev", "swap":
-                    System.out.println("[MEM] Sem acesso à memória para a instrução: " + instrucao.getInstrucao());
+                    System.out.println("[MEM] A operação " + instrucao.getInstrucao() + " não acessa a memória.");
                     break;
             }
         } else {
-            System.out.println("Nenhuma instrução para acessar a memória.");
+            System.out.println("    [NULL_MEM] Nenhuma instrução para acessar a memória.");
         }
         return instrucao;
     }

@@ -7,26 +7,6 @@ public class Registradores {
     public Registradores() {
         this.registradores = new int[32];
     }
-    public void iniciar(){
-        try{
-            BufferedReader br = new BufferedReader(new FileReader("src/input/registradores.txt"));
-            String linha;
-            System.out.println("\nIniciando Registradores");
-            for (int j = 0; j < registradores.length; j++){
-                System.out.printf("%4d", j);
-            }
-            System.out.println();
-            int i = 0;
-            while((linha = br.readLine()) != null){
-                this.registradores[i] = Integer.parseInt(linha);
-                System.out.printf("%4d", this.registradores[i]);
-                i++;
-            }
-            br.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     public void salvar() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/output/registradores_resultado.txt"))) {
@@ -40,14 +20,9 @@ public class Registradores {
         }
     }
 
-    // Getters e Setters ----------------------------------------
-    public int[] getRegistradores() {
-        return this.registradores;
+    public int getTamanho() {
+        return registradores.length;
     }
-    public void setRegistradores(int[] memoria) {
-        this.registradores = memoria;
-    }
-
     //read write
     public int getValor(int endereco) {
         if (endereco < 0){

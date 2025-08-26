@@ -3,9 +3,6 @@ import input.Memoria;
 import input.Registradores;
 import stages.*;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -14,6 +11,8 @@ public class Simulador {
     private Memoria memoria;
     private Registradores registradores;
     private List<Instrucao> instrucoes;
+
+    private Parser parser = new Parser();
 
     private A_Buscar buscar;
     private B_Decodificar decodificar;
@@ -31,9 +30,9 @@ public class Simulador {
 
     public Simulador() {
         this.pc = new PC();
-        this.memoria = new Memoria();
-        this.registradores = new Registradores();
-        this.instrucoes = new ArrayList<>();
+        this.memoria = parser.iniciarMemoria();;
+        this.registradores = parser.iniciarRegistradores();
+        this.instrucoes = parser.iniciarInstrucoes();
 
         this.buscar = new A_Buscar();
         this.decodificar = new B_Decodificar();
@@ -42,51 +41,20 @@ public class Simulador {
         this.escrever = new E_Escrever();
 
     }
-
     //------------------- Run ------------------------
     public void run(){
-        System.out.println("Simulador iniciado.");
+        System.out.println("\nSimulador iniciado.");
         while (pc.getValor() < instrucoes.size() * 4 + 16) {
+            System.out.println("------" + pc.getValor() + "------");
             escrever.run(rescrever, registradores);
-            rescrever = acessar.run(racessar, memoria, registradores);
-            racessar = executar.run(rexecutar, pc);
+            rescrever = acessar.run(racessar, memoria);
+            racessar = executar.run(rexecutar);
             rexecutar = decodificar.run(rdecodificar, registradores);
             rdecodificar = buscar.run(instrucoes, pc);
         }
-        System.out.println();
         registradores.salvar();
         memoria.salvar();
         System.out.println("Simulação concluída.");
-    }
-
-
-    //--------------Carregar Programa------------------
-
-
-    public void carregarProgama() {
-        memoria.iniciar();
-        registradores.iniciar();
-
-        try (BufferedReader br = new BufferedReader(new FileReader("src/input/instrucoes.txt"))) {
-            String linha;
-            int i = 0;
-            while ((linha = br.readLine()) != null) {
-                String[] partes = linha.trim().split("\\s+");
-
-                String op = partes[0];
-                String p1 = partes[1];
-                String p2 = partes.length > 2 ? partes[2] : " ";
-                String p3 = partes.length > 3 ? partes[3] : " ";
-                System.out.print("\nInstrução[" + i + "] = " + op + " " + p1 + " " + p2 + " " + p3);
-
-                Instrucao instrucao = new Instrucao(op, p1, p2, p3);
-                instrucoes.add(instrucao);
-
-                i++;
-            }
-        } catch (Exception e) {
-            System.out.println("Erro ao carregar instruções: " + e.getMessage());
-        }
     }
 }
 

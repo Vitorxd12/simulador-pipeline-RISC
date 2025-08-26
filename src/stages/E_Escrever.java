@@ -24,7 +24,7 @@ public class E_Escrever {
                     System.out.println("[WB] Operação sem escrita em registrador: " + instrucao.getInstrucao());
             }
         } else {
-            System.out.println("[WB_NULL] Nenhuma instrução para escrever nos registradores.");
+            System.out.println("    [NULL_WB] Nenhuma instrução para escrever nos registradores.");
         }
     }
 }

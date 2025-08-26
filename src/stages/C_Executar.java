@@ -4,7 +4,7 @@ import input.Instrucao;
 import input.Registradores;
 
 public class C_Executar {
-    public Instrucao run(Instrucao instrucao, PC pc) {
+    public Instrucao run(Instrucao instrucao) {
         if (instrucao != null) {
             int valR1 = instrucao.getValorR1();
             int valR2 = instrucao.getValorR2();
@@ -14,17 +14,17 @@ public class C_Executar {
                 case "add":
                     instrucao.setResultado(valR2 + valR3);
 
-                    System.out.println("[EX]" + pc.getValor() + " Executando ADD → x" + instrucao.getReg1()
+                    System.out.println("[EX] Executando ADD → x" + instrucao.getReg1()
                             + " = " + valR2 + " + " + valR3
-                            + " | Resultado =" + instrucao.getResultado());
+                            + " | Resultado = " + instrucao.getResultado());
                     break;
 
                 case "sub":
                     instrucao.setResultado(valR2 - valR3);
 
-                    System.out.println("[EX]" + pc.getValor() + " Executando SUB → x" + instrucao.getReg1()
+                    System.out.println("[EX] Executando SUB → x" + instrucao.getReg1()
                             + " = " + valR2 + " - " + valR3
-                            + " | Resultado =" + instrucao.getResultado());
+                            + " | Resultado = " + instrucao.getResultado());
                     break;
 
                 case "lw":
@@ -49,7 +49,7 @@ public class C_Executar {
 
                 case "avg":
                     int resultado = (valR2 + valR3) / 2;
-                    System.out.println("[EX] Executando AVG -> r" + instrucao.getReg1() + " = (" + valR2 + " + " + valR3 + ") / 2 | Resultado inteiro = " + resultado);
+                    System.out.println("[EX] Executando AVG -> r" + instrucao.getReg1() + " = (" + valR2 + " + " + valR3 + ") / 2 | Resultado = " + resultado);
                     instrucao.setResultado(resultado);
                     break;
 
@@ -66,10 +66,10 @@ public class C_Executar {
                     break;
 
                 default:
-                    System.out.println("[EX]" + pc.getValor() + " Operação não suportada: " + instrucao.getInstrucao());
+                    System.out.println("    [ERROR_EX] Operação não suportada: " + instrucao.getInstrucao());
             }
         } else {
-            System.out.println("Nenhuma instrução para executar.");
+            System.out.println("    [NULL_EX] Nenhuma instrução para executar.");
         }
         return instrucao;
     }
