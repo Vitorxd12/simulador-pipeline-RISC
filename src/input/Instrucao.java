@@ -7,6 +7,7 @@ public class Instrucao {
     private int val1, val2, val3;
     private int resultado;
 
+    //construtor
     public Instrucao(String operador, String r1, String r2, String r3) {
         switch (operador) {
             case ("add"):
@@ -40,13 +41,13 @@ public class Instrucao {
             case ("swap"):
                 reg1 = registradorParaInt(r1);
                 reg2 = registradorParaInt(r2);
-                reg3 = -1;
+                reg3 = 0;
                 System.out.println("\n" + instrucao + " " + reg1 + " " + reg2 + " " + reg3);
             case ("rev"):
                 this.instrucao = operador;
                 reg1 = registradorParaInt(r1);
                 reg2 = registradorParaInt(r2);
-                reg3 = -1;
+                reg3 = 0;
                 System.out.println("\n" + instrucao + " " + reg1 + " " + reg2);
                 break;
             default:
@@ -54,6 +55,7 @@ public class Instrucao {
         }
     }
 
+    //métodos para converter registrador em int
     public int registradorParaInt(String reg) {
         String regex = "\\D";
         return Integer.parseInt(reg.replaceAll(regex, ""));
@@ -72,6 +74,7 @@ public class Instrucao {
         return Integer.parseInt(nreg);
     }
 
+    //set valor
     public void setVal(int valorR1, int valorR2, int valorR3) {
         this.val1 = valorR1;
         this.val2 = valorR2;

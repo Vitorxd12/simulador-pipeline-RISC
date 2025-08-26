@@ -10,36 +10,26 @@ public class D_Acessar {
         if (instrucao != null) {
             switch (instrucao.getInstrucao()) {
                 case "lw":
+                    //pegua o resultado do executar que é o endereço
                     int enderecoLW = instrucao.getResultado();
-                    int valorNoEnderecoLW = memoria.getValor(enderecoLW);
-                    System.out.println("[MEM] Acessando memoria LW → Mem[" + enderecoLW + "] = " + valorNoEnderecoLW);
+                    //le o valor da memoria nesse endereço e seta de volta no atributo instrução da classe resultado
+                    instrucao.setResultado(memoria.getValor(enderecoLW));
+                    //resultado agora é o valor lido da memoria
+                    System.out.println("[MEM] Acessando memoria LW → Mem[" + enderecoLW + "] = " + instrucao.getResultado());
                     break;
 
                 case "sw":
+                    //pega o resultado do executar que é o endereço
                     int enderecoSW = instrucao.getResultado();
+                    //pega o valor do registrador r1 que deve ser salvo na memoria
                     int valorASalvar = instrucao.getValorR1();
-                    if (enderecoSW >= 0 && enderecoSW < memoria.getMemoria().length) {
-                        memoria.setValor(enderecoSW, valorASalvar);
-                        System.out.println("[MEM] Acessando memoria SW → Mem[" + enderecoSW + "] = " + valorASalvar);
-                    } else {
-                        System.out.println("[MEM] Erro ao acessar memória SW → Endereço inválido: " + enderecoSW);
-                    }
+                    //salva o valor no endereço da memoria
+                    memoria.setValor(enderecoSW, valorASalvar);
+                    System.out.println("[MEM] Acessando memoria SW → Mem[" + enderecoSW + "] = " + valorASalvar);
                     break;
 
-                case "add":
-                case "sub":
-                case "avg":
-                case "rev":
-                    System.out.println("rev não implementado no acessar");
-                    //valorLido = instrucao.getResultado();
-                    //System.out.println("[MEM] Sem acesso à memória para a instrução: " + instrucao.getInstrucao());
-                    break;
-                case "swap":
-                    System.out.println("swap não implementado no acessar");
-                    //int[] valoresSwap = executor.getResultadoSwap();
-                    //valorLido = valoresSwap[0];
-                    //valorLido2 = valoresSwap[1];
-                    //System.out.println("[MEM] Sem acesso à memória para a instrução: " + instrucao.getInstrucao());
+                case "add", "sub", "avg", "rev", "swap":
+                    System.out.println("[MEM] Sem acesso à memória para a instrução: " + instrucao.getInstrucao());
                     break;
             }
         } else {
