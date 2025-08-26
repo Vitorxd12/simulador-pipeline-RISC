@@ -29,7 +29,7 @@ public class Registradores {
     }
 
     public void salvar() {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/input/registradores.txt"))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/output/registradores_resultado.txt"))) {
             for (int i = 0; i < registradores.length; i++) {
                 writer.write(String.valueOf(registradores[i]));
                 writer.newLine(); // Adiciona uma nova linha após cada valor
@@ -47,15 +47,25 @@ public class Registradores {
     public void setRegistradores(int[] memoria) {
         this.registradores = memoria;
     }
+
+    //read write
     public int getValor(int endereco) {
-        if (endereco < 0 || endereco >= registradores.length) {
-            throw new IndexOutOfBoundsException("Endereço fora dos limites dos registradores.");
+        if (endereco < 0){
+            throw new IndexOutOfBoundsException("Endereço fora dos limites do registrador.");
+        }
+        while (endereco >= registradores.length) {
+            endereco = endereco - registradores.length;
+            System.out.println("Endereço de memória ajustado para: " + endereco);
         }
         return registradores[endereco];
     }
     public void setValor(int endereco, int valor) {
-        if (endereco < 0 || endereco >= registradores.length) {
-            throw new IndexOutOfBoundsException("Endereço fora dos limites dos registradores.");
+        if (endereco < 0){
+            throw new IndexOutOfBoundsException("Endereço fora dos limites do registrador.");
+        }
+        while (endereco >= registradores.length) {
+            endereco = endereco - registradores.length;
+            System.out.println("Endereço de memória ajustado para: " + endereco);
         }
         registradores[endereco] = valor;
     }

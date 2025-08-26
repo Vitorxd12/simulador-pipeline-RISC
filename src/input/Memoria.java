@@ -31,7 +31,7 @@ public class Memoria {
     }
 
     public void salvar() {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/input/memoria.txt"))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/output/memoria_resultado.txt"))) {
             for (int i = 0; i < memoria.length; i++) {
                 writer.write(String.valueOf(memoria[i]));
                 writer.newLine();
@@ -49,15 +49,25 @@ public class Memoria {
     public void setMemoria(int[] memoria) {
         this.memoria = memoria;
     }
+
+    //read write
     public int getValor(int endereco) {
-        if (endereco < 0 || endereco >= memoria.length) {
+        if (endereco < 0){
             throw new IndexOutOfBoundsException("Endereço fora dos limites da memória.");
+        }
+        while (endereco >= memoria.length) {
+            endereco = endereco - memoria.length;
+            System.out.println("Endereço de memória ajustado para: " + endereco);
         }
         return memoria[endereco];
     }
     public void setValor(int endereco, int valor) {
-        if (endereco < 0 || endereco >= memoria.length) {
+        if (endereco < 0){
             throw new IndexOutOfBoundsException("Endereço fora dos limites da memória.");
+        }
+        while (endereco >= memoria.length) {
+            endereco = endereco - memoria.length;
+            System.out.println("Endereço de memória ajustado para: " + endereco);
         }
         memoria[endereco] = valor;
     }

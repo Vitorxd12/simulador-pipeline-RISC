@@ -1,55 +1,56 @@
 package stages;
 
 import input.Instrucao;
+import input.Registradores;
 
 public class C_Executar {
-    public Instrucao instrucaoAtual;
-    public int resultado;
-    public int[] resultadoSwap = new int[2];
-
     public Instrucao run(Instrucao instrucao, PC pc) {
-        this.instrucaoAtual = instrucao;
-
-        if (instrucaoAtual != null) {
+        if (instrucao != null) {
             int valR1 = instrucao.getValorR1();
             int valR2 = instrucao.getValorR2();
             int valR3 = instrucao.getValorR3();
 
-            switch (instrucaoAtual.getInstrucao()) {
+            switch (instrucao.getInstrucao()) {
                 case "add":
-                    System.out.println("[EX]" + pc.getValor() + " Executando ADD → x" + instrucaoAtual.getReg1()
+                    instrucao.setResultado(valR2 + valR3);
+
+                    System.out.println("[EX]" + pc.getValor() + " Executando ADD → x" + instrucao.getReg1()
                             + " = " + valR2 + " + " + valR3
-                            + " | Resultado=" + instrucao.getResultado());
+                            + " | Resultado =" + instrucao.getResultado());
                     break;
 
                 case "sub":
                     instrucao.setResultado(valR2 - valR3);
-                    System.out.println("[EX]" + pc.getValor() + " Executando SUB → x" + instrucaoAtual.getReg1()
+
+                    System.out.println("[EX]" + pc.getValor() + " Executando SUB → x" + instrucao.getReg1()
                             + " = " + valR2 + " - " + valR3
-                            + " | Resultado=" + instrucao.getResultado());
+                            + " | Resultado =" + instrucao.getResultado());
                     break;
 
                 case "lw":
                     int enderecoLW = valR3 + valR2;
                     System.out.println("[EX] Calculando endereço LW → Mem[" + enderecoLW + "]");
-                    resultado = enderecoLW;
+                    instrucao.setResultado(enderecoLW);
                     break;
 
                 case "sw":
                     int enderecoSW = valR3 + valR2;
                     System.out.println("[EX] Calculando endereço SW → Mem[" + enderecoSW + "] = " + valR1);
-                    resultado = enderecoSW;
+                    instrucao.setResultado(enderecoSW);
                     break;
 
                 case "swap":
-                    resultadoSwap[0] = valR1;
-                    resultadoSwap[1] = valR2;
-                    System.out.println("[EX] Executando SWAP -> Valores: " + valR1 + " e " + valR2);
-                    break;
+                    System.out.println("swap não implementado");
+                    //int resultadoSwap1 = valR1;
+                    //int resultadoSwap2 = valR2;
+                    //System.out.println("[EX] Executando SWAP -> Valores: " + valR1 + " e " + valR2);
+                    //instrucao.setVal(resultadoSwap2, resultadoSwap1, 0);
+                    //break;
 
                 case "avg":
-                    resultado = (valR2 + valR3) / 2;
-                    System.out.println("[EX] Executando AVG -> r" + instrucaoAtual.getReg1() + " = (" + valR2 + " + " + valR3 + ") / 2 | Resultado inteiro = " + resultado);
+                    int resultado = (valR2 + valR3) / 2;
+                    System.out.println("[EX] Executando AVG -> r" + instrucao.getReg1() + " = (" + valR2 + " + " + valR3 + ") / 2 | Resultado inteiro = " + resultado);
+                    instrucao.setResultado(resultado);
                     break;
 
                 case "rev":
@@ -60,24 +61,16 @@ public class C_Executar {
                         reverso |= (original & 0xFF);
                         original >>= 8;
                     }
-                    resultado = reverso;
-                    System.out.println("[EX] Executando REV -> revertendo bits de r" + instrucaoAtual.getReg2() + " = " + registradores.getValor(instrucaoAtual.getReg2()) + " | Resultado = " + resultado);
+                    instrucao.setResultado(reverso);
+                    System.out.println("[EX] Executando REV -> revertendo bits de r" + instrucao.getReg2() + " = " + valR2 + " | Resultado = " + instrucao.getResultado());
                     break;
 
                 default:
-                    System.out.println("[EX]" + pc.getValor() + " Operação não suportada: " + instrucaoAtual.getInstrucao());
+                    System.out.println("[EX]" + pc.getValor() + " Operação não suportada: " + instrucao.getInstrucao());
             }
         } else {
             System.out.println("Nenhuma instrução para executar.");
         }
-        return instrucaoAtual;
-    }
-
-    public int getResultado() {
-        return resultado;
-    }
-
-    public int[] getResultadoSwap() {
-        return resultadoSwap;
+        return instrucao;
     }
 }

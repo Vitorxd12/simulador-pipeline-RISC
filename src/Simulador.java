@@ -49,7 +49,7 @@ public class Simulador {
         while (pc.getValor() < instrucoes.size() * 4 + 16) {
             escrever.run(rescrever, acessar, registradores);
             rescrever = acessar.run(racessar, memoria, executar, registradores);
-            racessar = executar.run(rexecutar, decodificar, registradores);
+            racessar = executar.run(rexecutar, pc, registradores);
             rexecutar = decodificar.run(rdecodificar, registradores);
             rdecodificar = buscar.run(instrucoes, pc);
         }

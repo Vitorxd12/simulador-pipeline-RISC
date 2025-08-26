@@ -5,7 +5,7 @@ import input.Registradores;
 
 public class E_Escrever {
     public Instrucao instrucaoAtual;
-    public void run(Instrucao instrucoes, D_Acessar acessador, Registradores registradores) {
+    public void run(Instrucao instrucoes, Registradores registradores) {
         this.instrucaoAtual = instrucoes;
 
         if (instrucaoAtual != null) {
