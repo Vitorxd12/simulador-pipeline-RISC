@@ -1,0 +1,67 @@
+
+--------------------Iniciando Simulação--------------------
+    [NULL_WB] Nenhuma instrução para escrever nos registradores.
+    [NULL_MEM] Nenhuma instrução para acessar a memória.
+    [NULL_EX] Nenhuma instrução para executar.
+    [NULL_ID] Nenhuma instrução para decodificar.
+[IF] Instrução buscada → "add 11 9 17" 
+    [NULL_WB] Nenhuma instrução para escrever nos registradores.
+    [NULL_MEM] Nenhuma instrução para acessar a memória.
+    [NULL_EX] Nenhuma instrução para executar.
+[ID] Decodificado operação → add | Reg 11 = 19 | Reg 9 = 67 | Reg 17 = 91
+[IF] Instrução buscada → "sub 2 4 9" 
+    [NULL_WB] Nenhuma instrução para escrever nos registradores.
+    [NULL_MEM] Nenhuma instrução para acessar a memória.
+[EX] Executando ADD → x11 = 67 + 91 | Resultado = 158
+[ID] Decodificado operação → sub | Reg 2 = 94 | Reg 4 = 56 | Reg 9 = 67
+[IF] Instrução buscada → "lw 1 3 6" 
+    [NULL_WB] Nenhuma instrução para escrever nos registradores.
+[MEM] A operação add não acessa a memória.
+[EX] Executando SUB → x2 = 56 - 67 | Resultado = -11
+[ID] Decodificado operação → lw | Reg 1 = 12 | Reg 3 = 7 | Reg 6 = 88
+[IF] Instrução buscada → "add 10 1 3" 
+[WB] Operação add escrevendo valor da memoria (158) no registrador R11.
+[MEM] A operação sub não acessa a memória.
+[EX] Calculando endereço LW → Mem[95]
+[ID] Decodificado operação → add | Reg 10 = 98 | Reg 1 = 12 | Reg 3 = 7
+[IF] Instrução buscada → "sw 10 3 6" 
+[WB] Operação sub escrevendo valor da memoria (-11) no registrador R2.
+Endereço de memória ajustado para: 63
+Endereço de memória ajustado para: 31
+[MEM] Acessando memoria LW → Mem[95] = 49
+[EX] Executando ADD → x10 = 12 + 7 | Resultado = 19
+[ID] Decodificado operação → sw | Reg 10 = 98 | Reg 3 = 7 | Reg 6 = 88
+[IF] Instrução buscada → "swap 5 8 0" 
+[WB] Operação lw escrevendo valor da memoria (49) no registrador R1.
+[MEM] A operação add não acessa a memória.
+[EX] Calculando endereço SW → Mem[95] = 98
+[ID] Decodificado operação → swap | Reg 5 = 35 | Reg 8 = 41 | Reg 0 = 73
+[IF] Instrução buscada → "avg 22 27 21" 
+[WB] Operação add escrevendo valor da memoria (19) no registrador R10.
+Endereço de memória ajustado para: 63
+Endereço de memória ajustado para: 31
+[MEM] Acessando memoria SW → Mem[95] = 98
+[EX] Executando SWAP → sem operações para serem feitas
+[ID] Decodificado operação → avg | Reg 22 = 5 | Reg 27 = 100 | Reg 21 = 20
+[IF] Instrução buscada → "rev 14 15 0" 
+[WB] Operação sem escrita em registrador: sw
+[MEM] A operação swap não acessa a memória.
+[EX] Executando AVG -> r22 = (100 + 20) / 2 | Resultado = 60
+[ID] Decodificado operação → rev | Reg 14 = 39 | Reg 15 = 84 | Reg 0 = 73
+    [NULL_IF] Nenhuma instrução encontrada no endereço 8
+[WB] Swap: trocou R5 (35) com R8 (41)
+[MEM] A operação avg não acessa a memória.
+[EX] Executando REV -> revertendo bits de r15 = 84 | Resultado = 1409286144
+    [NULL_ID] Nenhuma instrução para decodificar.
+    [NULL_IF] Nenhuma instrução encontrada no endereço 9
+[WB] Operação avg escrevendo valor da memoria (60) no registrador R22.
+[MEM] A operação rev não acessa a memória.
+    [NULL_EX] Nenhuma instrução para executar.
+    [NULL_ID] Nenhuma instrução para decodificar.
+    [NULL_IF] Nenhuma instrução encontrada no endereço 10
+[WB] Operação rev escrevendo valor da memoria (1409286144) no registrador R14.
+    [NULL_MEM] Nenhuma instrução para acessar a memória.
+    [NULL_EX] Nenhuma instrução para executar.
+    [NULL_ID] Nenhuma instrução para decodificar.
+    [NULL_IF] Nenhuma instrução encontrada no endereço 11
+--------------------Simulação concluída--------------------

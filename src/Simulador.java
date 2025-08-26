@@ -3,6 +3,7 @@ import input.Memoria;
 import input.Registradores;
 import stages.*;
 
+import java.io.PrintStream;
 import java.util.List;
 
 
@@ -42,17 +43,26 @@ public class Simulador {
 
     }
     //------------------- Run ------------------------
-    public void run(){
-        System.out.println("\n--------------------Iniciando Simulação--------------------");
-        while (pc.getValor() < instrucoes.size() * 4 + 16) {
-            System.out.println("                     ────────" + (pc.getValor()/4) + "──────");
-            escrever.run(rescrever, registradores);
-            rescrever = acessar.run(racessar, memoria);
-            racessar = executar.run(rexecutar);
-            rexecutar = decodificar.run(rdecodificar, registradores);
-            rdecodificar = buscar.run(instrucoes, pc);
+    public void run() {
+        PrintStream originalOut = System.out;
+        try (PrintStream fileOut = new PrintStream("src/output/simulacao_log.txt")) {
+            SalvarLOG dualOut = new SalvarLOG(fileOut, originalOut);
+            System.setOut(dualOut);
+
+            System.out.println("\n--------------------Iniciando Simulação--------------------");
+            while (pc.getValor() < instrucoes.size() * 4 + 16) {
+                escrever.run(rescrever, registradores);
+                rescrever = acessar.run(racessar, memoria);
+                racessar = executar.run(rexecutar);
+                rexecutar = decodificar.run(rdecodificar, registradores);
+                rdecodificar = buscar.run(instrucoes, pc);
+            }
+            System.out.println("--------------------Simulação concluída--------------------");
+        } catch (Exception e) {
+            originalOut.println("Erro ao salvar log da simulação: " + e.getMessage());
+        } finally {
+            System.setOut(originalOut);
         }
-        System.out.println("--------------------Simulação concluída--------------------");
         parser.relatorioFinal(memoria, registradores);
         registradores.salvar();
         memoria.salvar();
