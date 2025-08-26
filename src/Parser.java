@@ -15,8 +15,8 @@ public class Parser {
             System.out.printf("%3d ", j);
         }
         System.out.println();
-        for (int i = 0; i < registradores.getRegistradores().length; i++) {
-            System.out.printf("%4d", i, registradores.getValor(i));
+        for (int i = 0; i < registradores.getTamanho(); i++) {
+            System.out.printf("%4d", registradores.getValor(i));
         }
         System.out.println();
         System.out.println("\n--------------------Memória Final--------------------");
