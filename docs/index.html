@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Simulador Pipeline RISC</title>
+<meta name="description" content="Simulador de pipeline RISC de 5 estágios (IF, ID, EX, MEM, WB) escrito em Java, rodando na web.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=VT323&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="landing">
+<canvas id="rain" aria-hidden="true"></canvas>
+
+<main class="wrap">
+  <section class="box hero">
+<pre class="ascii" aria-label="RISC PIPELINE">
+ ____  ___ ____   ____   ____ ___ ____  _____ _     ___ _   _ _____
+|  _ \|_ _/ ___| / ___| |  _ \_ _|  _ \| ____| |   |_ _| \ | | ____|
+| |_) || |\___ \| |     | |_) | || |_) |  _| | |    | ||  \| |  _|
+|  _ < | | ___) | |___  |  __/| ||  __/| |___| |___ | || |\  | |___
+|_| \_\___|____/ \____| |_|  |___|_|   |_____|_____|___|_| \_|_____|
+</pre>
+    <p class="lead">&gt; simulador de pipeline RISC de <strong>5 estágios</strong>, escrito em Java.<span class="cursor"></span></p>
+    <p class="sub">Escreva as instruções, carregue memória e registradores, e veja cada instrução
+      atravessar IF → ID → EX → MEM → WB, ciclo a ciclo.</p>
+    <a class="btn cta" href="simulador.html">[ &gt;&gt; INICIAR SIMULAÇÃO ]</a>
+  </section>
+
+  <section class="box">
+    <div class="box-title">┤ OS 5 ESTÁGIOS ├</div>
+    <div class="flow">
+      <div class="fstage"><b>IF</b><small>busca a instrução</small></div>
+      <div class="arrow" aria-hidden="true">→</div>
+      <div class="fstage"><b>ID</b><small>lê os registradores</small></div>
+      <div class="arrow" aria-hidden="true">→</div>
+      <div class="fstage"><b>EX</b><small>faz a conta</small></div>
+      <div class="arrow" aria-hidden="true">→</div>
+      <div class="fstage"><b>MEM</b><small>lê ou grava memória</small></div>
+      <div class="arrow" aria-hidden="true">→</div>
+      <div class="fstage"><b>WB</b><small>grava o resultado</small></div>
+    </div>
+  </section>
+
+  <section class="grid-two">
+    <div class="box">
+      <div class="box-title">┤ RISC × CISC ├</div>
+      <p class="intro">RISC usa poucas instruções simples e regulares, e é isso que deixa o pipeline fluir.</p>
+      <table class="cmp">
+        <thead><tr><th></th><th>RISC</th><th>CISC</th></tr></thead>
+        <tbody>
+          <tr><th>instruções</th><td>poucas e simples</td><td>muitas e complexas</td></tr>
+          <tr><th>tamanho</th><td>fixo</td><td>variável</td></tr>
+          <tr><th>memória</th><td>só <code>lw</code> / <code>sw</code></td><td>quase qualquer instrução</td></tr>
+          <tr><th>registradores</th><td>muitos (aqui 32)</td><td>poucos</td></tr>
+          <tr><th>pipeline</th><td>fácil</td><td>difícil</td></tr>
+          <tr><th>exemplos</th><td>RISC-V, ARM, MIPS</td><td>x86</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="box">
+      <div class="box-title">┤ PIPELINE ├</div>
+      <p class="intro">Como numa linha de montagem: enquanto uma instrução executa, a próxima já está sendo buscada.</p>
+        <table class="mini">
+          <caption>sem pipeline · 3 instruções = 15 ciclos</caption>
+          <tr><th></th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th><th>11</th><th>12</th><th>13</th><th>14</th><th>15</th></tr>
+          <tr><th>i1</th><td class="s">F</td><td class="s">D</td><td class="s">X</td><td class="s">M</td><td class="s">W</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><th>i2</th><td></td><td></td><td></td><td></td><td></td><td class="s">F</td><td class="s">D</td><td class="s">X</td><td class="s">M</td><td class="s">W</td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><th>i3</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td class="s">F</td><td class="s">D</td><td class="s">X</td><td class="s">M</td><td class="s">W</td></tr>
+        </table>
+        <table class="mini">
+          <caption>com pipeline · 3 instruções = 7 ciclos</caption>
+          <tr><th></th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th><th>11</th><th>12</th><th>13</th><th>14</th><th>15</th></tr>
+          <tr><th>i1</th><td class="s">F</td><td class="s">D</td><td class="s">X</td><td class="s">M</td><td class="s">W</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><th>i2</th><td></td><td class="s">F</td><td class="s">D</td><td class="s">X</td><td class="s">M</td><td class="s">W</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><th>i3</th><td></td><td></td><td class="s">F</td><td class="s">D</td><td class="s">X</td><td class="s">M</td><td class="s">W</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        </table>
+      <p class="legenda">F busca · D decodifica · X executa · M memória · W escreve</p>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <span>Tópicos Emergentes em Arquitetura de Computadores</span>
+  </footer>
+</main>
+
+<script src="rain.js"></script>
+</body>
+</html>

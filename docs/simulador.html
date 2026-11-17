@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Simulador · Pipeline RISC</title>
+<meta name="description" content="Simulador de pipeline RISC de 5 estágios (IF, ID, EX, MEM, WB) com o motor Java original.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=VT323&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<canvas id="rain" aria-hidden="true"></canvas>
+
+<main class="wrap">
+  <header class="box topbar">
+    <a class="logo" href="./">RISC<span>::</span>PIPELINE</a>
+    <span id="status">[ PRONTO ]</span>
+    <a class="btn" href="./">[ ← SOBRE ]</a>
+  </header>
+
+  <section class="grid-top">
+    <!-- ENTRADAS -->
+    <div class="box">
+      <div class="box-title">┤ ENTRADA ├</div>
+      <div class="tabs" role="tablist">
+        <button class="tab on" data-tab="instrucoes" role="tab">instrucoes.txt</button>
+        <button class="tab" data-tab="memoria" role="tab">memoria.txt</button>
+        <button class="tab" data-tab="registradores" role="tab">registradores.txt</button>
+      </div>
+      <textarea id="in-instrucoes" class="editor" spellcheck="false" data-panel="instrucoes" aria-label="instruções" placeholder="add x1 x2 x3"></textarea>
+      <textarea id="in-memoria" class="editor" spellcheck="false" data-panel="memoria" hidden></textarea>
+      <textarea id="in-registradores" class="editor" spellcheck="false" data-panel="registradores" hidden></textarea>
+      <div class="row">
+        <button id="btn-reset" class="btn" title="Volta para os arquivos originais de src/input">[ RESTAURAR ]</button>
+      </div>
+    </div>
+
+    <!-- ESTÁGIOS DO CICLO ATUAL -->
+    <div class="box">
+      <div class="box-title">┤ CICLO <span id="cyc-n">-</span>/<span id="cyc-total">-</span> &nbsp;PC=<span id="cyc-pc">-</span> ├</div>
+      <div class="stages" id="stages"></div>
+      <div class="row controls">
+        <button class="btn" id="btn-prev" title="Ciclo anterior" aria-label="Ciclo anterior">◀</button>
+        <button class="btn primary main" id="btn-main" title="Roda o simulador Java e anima os ciclos (Ctrl+Enter)">EXECUTAR</button>
+        <button class="btn" id="btn-next" title="Próximo ciclo" aria-label="Próximo ciclo">▶</button>
+        <label class="speed">vel
+          <input type="range" id="speed" min="150" max="1500" step="50" value="950" aria-label="velocidade">
+        </label>
+      </div>
+      <pre class="term small" id="cyc-log"></pre>
+    </div>
+  </section>
+
+  <!-- DIAGRAMA -->
+  <section class="box">
+    <div class="box-title">┤ DIAGRAMA DO PIPELINE ├</div>
+    <table class="diagram" id="diagram"></table>
+  </section>
+
+  <section class="grid-two">
+    <div class="box">
+      <div class="box-title">┤ REGISTRADORES ├</div>
+      <div class="cells" id="regs"></div>
+    </div>
+    <div class="box">
+      <div class="box-title">┤ MEMÓRIA ├</div>
+      <div class="cells" id="mem"></div>
+    </div>
+  </section>
+
+  <!-- CONSOLE -->
+  <section class="box">
+    <div class="box-title">┤ CONSOLE ├</div>
+    <div class="row dl">
+      <span class="muted">baixar:</span>
+      <button class="btn" data-dl="simulacao_log.txt">log</button>
+      <button class="btn" data-dl="registradores_resultado.txt">registradores</button>
+      <button class="btn" data-dl="memoria_resultado.txt">memória</button>
+    </div>
+    <pre class="term" id="console"></pre>
+  </section>
+</main>
+
+<script src="rain.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
